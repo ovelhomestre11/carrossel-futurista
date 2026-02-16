@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carrossel Futurista</title>
+<title>O Velho Mestre 11</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@700;800&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
+
+/* ================= GLOBAL ================= */
 
 *{
 margin:0;
@@ -15,45 +17,132 @@ padding:0;
 box-sizing:border-box;
 }
 
-body{
-background:transparent;
-display:flex;
-justify-content:center;
-align-items:center;
-min-height:100svh;
+html, body{
+background:transparent !important;
+background-color:transparent !important;
 font-family:'Orbitron',sans-serif;
-overflow:hidden;
+color:white;
+display:flex;
+flex-direction:column;
+align-items:center;
+width:100%;
+overflow-x:hidden;
 }
 
-.carousel-container{
-position:relative;
+/* ================= SCANNER ================= */
+
+.holo-scanner{
+position:fixed;
+top:0;
+left:0;
 width:100%;
-max-width:900px;
-height:500px;
+height:1px;
+background:linear-gradient(90deg,
+transparent,
+rgba(255,0,120,.4),
+rgba(0,255,255,.6),
+rgba(255,0,120,.4),
+transparent);
+animation:scanMove 6s linear infinite;
+pointer-events:none;
+z-index:0;
+opacity:.4;
+}
+
+@keyframes scanMove{
+0%{top:0}
+100%{top:100%}
+}
+
+/* ================= LOGO ================= */
+
+.logo{
+margin-top:40px;
+text-align:center;
+position:relative;
+z-index:2;
+}
+
+.logo-text{
+font-family:'Syncopate',sans-serif;
+font-size:clamp(1.5rem,5vw,2.6rem);
+letter-spacing:2px;
+background:linear-gradient(to bottom,#ffffff,#bfbfbf);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.logo-number{
+font-family:'Rajdhani',sans-serif;
+font-weight:800;
+margin-left:6px;
+font-size:clamp(1.5rem,5vw,2.6rem);
+background:linear-gradient(to bottom,#ff0040,#ff7a00,#ff0040);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:firePulse 2s ease-in-out infinite alternate;
+filter:drop-shadow(0 0 8px rgba(255,0,80,.5));
+}
+
+@keyframes firePulse{
+0%{filter:drop-shadow(0 0 5px rgba(255,0,80,.3))}
+100%{filter:drop-shadow(0 0 15px rgba(255,0,80,.9))}
+}
+
+.logo-underline{
+margin:6px auto 0;
+height:1px;
+width:90%;
+background:linear-gradient(90deg,transparent,#ff007f,#00e6cc,transparent);
+animation:underlineMove 3s ease-in-out infinite alternate;
+}
+
+@keyframes underlineMove{
+0%{opacity:.4;width:80%}
+100%{opacity:1;width:100%}
+}
+
+.subtitle{
+margin-top:12px;
+font-size:.75rem;
+letter-spacing:3px;
+color:#ccc;
+opacity:.8;
+}
+
+/* ================= CARROSSEL ================= */
+
+.carousel-container{
+margin-top:35px;
+width:95%;
+max-width:1000px;
+position:relative;
+border-radius:18px;
 overflow:hidden;
-border-radius:20px;
-border:2px solid rgba(0,255,255,0.4);
-box-shadow:
-0 0 40px rgba(0,255,255,0.3),
-inset 0 0 25px rgba(255,0,255,0.1);
+background:rgba(0,0,0,.6);
+border:1px solid rgba(255,0,120,.3);
+backdrop-filter:blur(6px);
 }
 
 .carousel-track{
 display:flex;
-height:100%;
-transition:transform 0.8s cubic-bezier(.77,0,.18,1);
+transition:transform .7s cubic-bezier(.77,0,.18,1);
+will-change:transform;
 }
 
 .carousel-slide{
 min-width:100%;
-height:100%;
-position:relative;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
 }
 
 .carousel-slide img{
-width:100%;
-height:100%;
-object-fit:cover;
+max-width:100%;
+height:auto;
+object-fit:contain;
+border-radius:12px;
 }
 
 /* SETAS */
@@ -62,114 +151,104 @@ object-fit:cover;
 position:absolute;
 top:50%;
 transform:translateY(-50%);
-width:50px;
-height:50px;
+width:42px;
+height:42px;
 border-radius:50%;
-background:rgba(0,0,0,0.6);
-border:1px solid rgba(0,255,255,0.5);
-color:#00ffff;
-font-size:24px;
+background:rgba(0,0,0,.6);
+border:1px solid #ff007f;
+color:#ff007f;
 display:flex;
 justify-content:center;
 align-items:center;
 cursor:pointer;
-z-index:10;
-transition:0.3s;
+transition:.3s;
 }
 
 .arrow:hover{
-box-shadow:0 0 15px #00ffff;
+box-shadow:0 0 12px #ff007f;
 }
 
-.arrow-left{ left:15px; }
-.arrow-right{ right:15px; }
+.arrow-left{left:12px}
+.arrow-right{right:12px}
 
-/* BOLINHAS */
+/* DOTS */
 
 .dots{
 position:absolute;
-bottom:20px;
+bottom:12px;
 width:100%;
 display:flex;
 justify-content:center;
-gap:10px;
-z-index:10;
+gap:6px;
 }
 
 .dot{
-width:12px;
-height:12px;
+width:9px;
+height:9px;
 border-radius:50%;
-background:rgba(255,255,255,0.3);
+background:rgba(255,255,255,.3);
 cursor:pointer;
-transition:0.3s;
+transition:.3s;
 }
 
 .dot.active{
-background:#00ffff;
-box-shadow:0 0 10px #00ffff;
-}
-
-@media(max-width:768px){
-.carousel-container{
-height:350px;
-}
+background:#00e6cc;
+box-shadow:0 0 8px #00e6cc;
 }
 
 </style>
 </head>
 <body>
 
+<div class="holo-scanner"></div>
+
+<div class="logo">
+<span class="logo-text">O VELHO MESTRE</span>
+<span class="logo-number">11</span>
+<div class="logo-underline"></div>
+<div class="subtitle">ÁLBUM DE FOTOS COMEMORATIVA DO VELHO 2026</div>
+</div>
+
 <div class="carousel-container">
-
-<div class="carousel-track" id="track">
-
-<div class="carousel-slide">
-<img src="img/foto1.jpg">
-</div>
-
-<div class="carousel-slide">
-<img src="img/foto2.jpg">
-</div>
-
-<div class="carousel-slide">
-<img src="img/foto3.jpg">
-</div>
-
-<div class="carousel-slide">
-<img src="img/foto4.jpg">
-</div>
-
-</div>
+<div class="carousel-track" id="track"></div>
 
 <div class="arrow arrow-left" id="prev">&#10094;</div>
 <div class="arrow arrow-right" id="next">&#10095;</div>
 
 <div class="dots" id="dots"></div>
-
 </div>
 
 <script>
 
-const track=document.getElementById('track');
-const slides=Array.from(track.children);
-const nextBtn=document.getElementById('next');
-const prevBtn=document.getElementById('prev');
-const dotsContainer=document.getElementById('dots');
+const totalImages = 25;
+const track = document.getElementById('track');
+const dotsContainer = document.getElementById('dots');
+let currentIndex = 0;
+let autoPlay;
 
-let currentIndex=0;
-let autoPlayInterval;
+/* GERAR IMAGENS AUTOMATICAMENTE */
 
-/* Criar bolinhas */
-slides.forEach((_,index)=>{
+for(let i=1;i<=totalImages;i++){
+const slide=document.createElement('div');
+slide.classList.add('carousel-slide');
+
+const img=document.createElement('img');
+img.src=`img/foto${i}.jpg`;
+img.loading="lazy";
+img.decoding="async";
+
+slide.appendChild(img);
+track.appendChild(slide);
+
 const dot=document.createElement('div');
 dot.classList.add('dot');
-if(index===0) dot.classList.add('active');
-dot.addEventListener('click',()=>goToSlide(index));
+if(i===1) dot.classList.add('active');
+dot.addEventListener('click',()=>goToSlide(i-1));
 dotsContainer.appendChild(dot);
-});
+}
 
-const dots=Array.from(dotsContainer.children);
+const slides=document.querySelectorAll('.carousel-slide');
+const dots=document.querySelectorAll('.dot');
 
 function updateDots(){
 dots.forEach(dot=>dot.classList.remove('active'));
@@ -192,25 +271,24 @@ currentIndex=(currentIndex-1+slides.length)%slides.length;
 goToSlide(currentIndex);
 }
 
-nextBtn.addEventListener('click',nextSlide);
-prevBtn.addEventListener('click',prevSlide);
+document.getElementById('next').addEventListener('click',nextSlide);
+document.getElementById('prev').addEventListener('click',prevSlide);
 
-/* AUTOPLAY */
-function startAutoPlay(){
-autoPlayInterval=setInterval(nextSlide,4000);
+/* AUTOPLAY OTIMIZADO */
+function startAuto(){
+autoPlay=setInterval(nextSlide,5000);
+}
+function stopAuto(){
+clearInterval(autoPlay);
 }
 
-function stopAutoPlay(){
-clearInterval(autoPlayInterval);
-}
-
-startAutoPlay();
+startAuto();
 
 document.querySelector('.carousel-container')
-.addEventListener('mouseenter',stopAutoPlay);
+.addEventListener('mouseenter',stopAuto);
 
 document.querySelector('.carousel-container')
-.addEventListener('mouseleave',startAutoPlay);
+.addEventListener('mouseleave',startAuto);
 
 /* SWIPE MOBILE */
 

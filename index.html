@@ -15,7 +15,6 @@
 
 html,body{
 background:transparent !important;
-background-color:transparent !important;
 font-family:'Orbitron',sans-serif;
 color:white;
 display:flex;
@@ -103,30 +102,6 @@ cursor:pointer;
 transform:scale(1.06);
 }
 
-/* 🔥 MARCA D'ÁGUA */
-.carousel-slide::after{
-content:"o velho mestre 11";
-position:absolute;
-bottom:30px;
-right:40px;
-font-family:'Syncopate',sans-serif;
-font-size:clamp(12px,2vw,18px);
-letter-spacing:2px;
-background:linear-gradient(45deg,#ffffff,#ff0040,#ffffff);
-background-size:200% 200%;
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:shine 4s ease-in-out infinite;
-text-shadow:0 0 6px rgba(255,0,64,.8),
-0 0 12px rgba(255,0,64,.6);
-pointer-events:none;
-}
-
-@keyframes shine{
-0%,100%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-}
-
 /* SETAS */
 
 .arrow{
@@ -138,7 +113,9 @@ border-radius:50%;
 background:rgba(0,0,0,.6);
 border:1px solid #ff007f;
 color:#ff007f;
-display:flex;justify-content:center;align-items:center;
+display:flex;
+justify-content:center;
+align-items:center;
 cursor:pointer;
 }
 
@@ -147,12 +124,17 @@ cursor:pointer;
 
 .dots{
 position:absolute;
-bottom:12px;width:100%;
-display:flex;justify-content:center;gap:6px;
+bottom:12px;
+width:100%;
+display:flex;
+justify-content:center;
+gap:6px;
 }
 
 .dot{
-width:9px;height:9px;border-radius:50%;
+width:9px;
+height:9px;
+border-radius:50%;
 background:rgba(255,255,255,.3);
 cursor:pointer;
 }
@@ -162,7 +144,7 @@ background:#00e6cc;
 box-shadow:0 0 8px #00e6cc;
 }
 
-/* ================= BOTÃO RODAPÉ (MENOR NO DESKTOP) ================= */
+/* ================= BOTÃO RODAPÉ ================= */
 
 .tech-login-container{
 width:100%;
@@ -177,8 +159,8 @@ display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
-width:320px;            /* 🔥 FIXO PEQUENO */
-height:65px;            /* 🔥 TAMANHO MOBILE */
+width:320px;
+height:65px;
 border-radius:18px;
 text-decoration:none;
 background:#111;
@@ -213,7 +195,11 @@ margin-top:4px;
 letter-spacing:1px;
 }
 
-/* RESPONSIVO */
+@keyframes shine{
+0%,100%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+}
+
 @media(max-width:480px){
 .tech-premium-button{
 width:90%;
@@ -238,7 +224,6 @@ width:90%;
 <div class="dots" id="dots"></div>
 </div>
 
-<!-- 🔥 BOTÃO EXTREMO RODAPÉ -->
 <div class="tech-login-container">
 <a href="https://jokers11.com/area-premium-login"
 target="_blank"
@@ -290,13 +275,20 @@ track.style.transform=`translateX(-${index*100}%)`;
 updateDots();
 }
 
-function nextSlide(){currentIndex=(currentIndex+1)%slides.length;goToSlide(currentIndex);}
-function prevSlide(){currentIndex=(currentIndex-1+slides.length)%slides.length;goToSlide(currentIndex);}
+function nextSlide(){
+currentIndex=(currentIndex+1)%slides.length;
+goToSlide(currentIndex);
+}
+
+function prevSlide(){
+currentIndex=(currentIndex-1+slides.length)%slides.length;
+goToSlide(currentIndex);
+}
 
 document.getElementById('next').onclick=nextSlide;
 document.getElementById('prev').onclick=prevSlide;
 
-/* 🔥 FULLSCREEN COM DOWNLOAD */
+/* FULLSCREEN + DOWNLOAD */
 
 function openFullscreen(src){
 

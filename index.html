@@ -11,13 +11,9 @@
 
 /* ================= GLOBAL ================= */
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
-html, body{
+html,body{
 background:transparent !important;
 background-color:transparent !important;
 font-family:'Orbitron',sans-serif;
@@ -29,44 +25,16 @@ width:100%;
 overflow-x:hidden;
 }
 
-/* ================= SCANNER ================= */
-
-.holo-scanner{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:1px;
-background:linear-gradient(90deg,
-transparent,
-rgba(255,0,120,.4),
-rgba(0,255,255,.6),
-rgba(255,0,120,.4),
-transparent);
-animation:scanMove 6s linear infinite;
-pointer-events:none;
-z-index:0;
-opacity:.4;
-}
-
-@keyframes scanMove{
-0%{top:0}
-100%{top:100%}
-}
-
 /* ================= LOGO ================= */
 
 .logo{
 margin-top:40px;
 text-align:center;
-position:relative;
-z-index:2;
 }
 
 .logo-text{
 font-family:'Syncopate',sans-serif;
 font-size:clamp(1.5rem,5vw,2.6rem);
-letter-spacing:2px;
 background:linear-gradient(to bottom,#ffffff,#bfbfbf);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
@@ -81,25 +49,11 @@ background:linear-gradient(to bottom,#ff0040,#ff7a00,#ff0040);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 animation:firePulse 2s ease-in-out infinite alternate;
-filter:drop-shadow(0 0 8px rgba(255,0,80,.5));
 }
 
 @keyframes firePulse{
 0%{filter:drop-shadow(0 0 5px rgba(255,0,80,.3))}
 100%{filter:drop-shadow(0 0 15px rgba(255,0,80,.9))}
-}
-
-.logo-underline{
-margin:6px auto 0;
-height:1px;
-width:90%;
-background:linear-gradient(90deg,transparent,#ff007f,#00e6cc,transparent);
-animation:underlineMove 3s ease-in-out infinite alternate;
-}
-
-@keyframes underlineMove{
-0%{opacity:.4;width:80%}
-100%{opacity:1;width:100%}
 }
 
 .subtitle{
@@ -121,13 +75,11 @@ border-radius:18px;
 overflow:hidden;
 background:rgba(0,0,0,.6);
 border:1px solid rgba(255,0,120,.3);
-backdrop-filter:blur(6px);
 }
 
 .carousel-track{
 display:flex;
 transition:transform .7s cubic-bezier(.77,0,.18,1);
-will-change:transform;
 }
 
 .carousel-slide{
@@ -136,13 +88,43 @@ display:flex;
 justify-content:center;
 align-items:center;
 padding:20px;
+position:relative;
 }
 
 .carousel-slide img{
 max-width:100%;
-height:auto;
-object-fit:contain;
 border-radius:12px;
+transition:transform .6s cubic-bezier(.23,1,.32,1);
+cursor:pointer;
+}
+
+/* 🔥 ZOOM PREMIUM */
+.carousel-slide img:hover{
+transform:scale(1.06);
+}
+
+/* 🔥 MARCA D'ÁGUA */
+.carousel-slide::after{
+content:"o velho mestre 11";
+position:absolute;
+bottom:30px;
+right:40px;
+font-family:'Syncopate',sans-serif;
+font-size:clamp(12px,2vw,18px);
+letter-spacing:2px;
+background:linear-gradient(45deg,#ffffff,#ff0040,#ffffff);
+background-size:200% 200%;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:shine 4s ease-in-out infinite;
+text-shadow:0 0 6px rgba(255,0,64,.8),
+0 0 12px rgba(255,0,64,.6);
+pointer-events:none;
+}
+
+@keyframes shine{
+0%,100%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
 }
 
 /* SETAS */
@@ -151,44 +133,28 @@ border-radius:12px;
 position:absolute;
 top:50%;
 transform:translateY(-50%);
-width:42px;
-height:42px;
+width:42px;height:42px;
 border-radius:50%;
 background:rgba(0,0,0,.6);
 border:1px solid #ff007f;
 color:#ff007f;
-display:flex;
-justify-content:center;
-align-items:center;
+display:flex;justify-content:center;align-items:center;
 cursor:pointer;
-transition:.3s;
-}
-
-.arrow:hover{
-box-shadow:0 0 12px #ff007f;
 }
 
 .arrow-left{left:12px}
 .arrow-right{right:12px}
 
-/* DOTS */
-
 .dots{
 position:absolute;
-bottom:12px;
-width:100%;
-display:flex;
-justify-content:center;
-gap:6px;
+bottom:12px;width:100%;
+display:flex;justify-content:center;gap:6px;
 }
 
 .dot{
-width:9px;
-height:9px;
-border-radius:50%;
+width:9px;height:9px;border-radius:50%;
 background:rgba(255,255,255,.3);
 cursor:pointer;
-transition:.3s;
 }
 
 .dot.active{
@@ -196,37 +162,101 @@ background:#00e6cc;
 box-shadow:0 0 8px #00e6cc;
 }
 
+/* ================= BOTÃO RODAPÉ (MENOR NO DESKTOP) ================= */
+
+.tech-login-container{
+width:100%;
+display:flex;
+justify-content:center;
+margin-top:60px;
+margin-bottom:20px;
+}
+
+.tech-premium-button{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+width:320px;            /* 🔥 FIXO PEQUENO */
+height:65px;            /* 🔥 TAMANHO MOBILE */
+border-radius:18px;
+text-decoration:none;
+background:#111;
+border:2px solid #000;
+transition:.4s;
+box-shadow:0 0 20px rgba(0,0,0,.6);
+}
+
+.tech-premium-button:hover{
+transform:translateY(-4px) scale(1.03);
+border-color:#ff0040;
+box-shadow:0 0 35px rgba(255,0,64,.4);
+}
+
+.tech-title{
+font-family:'Orbitron',monospace;
+font-size:16px;
+font-weight:800;
+letter-spacing:1px;
+text-transform:uppercase;
+background:linear-gradient(45deg,#ffffff,#ff0040,#ffffff);
+background-size:200% 200%;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:shine 4s ease-in-out infinite;
+}
+
+.tech-subtitle{
+font-size:9px;
+color:#ccc;
+margin-top:4px;
+letter-spacing:1px;
+}
+
+/* RESPONSIVO */
+@media(max-width:480px){
+.tech-premium-button{
+width:90%;
+}
+}
+
 </style>
 </head>
-<body>
 
-<div class="holo-scanner"></div>
+<body>
 
 <div class="logo">
 <span class="logo-text">O VELHO MESTRE</span>
 <span class="logo-number">11</span>
-<div class="logo-underline"></div>
 <div class="subtitle">ÁLBUM DE FOTOS COMEMORATIVA DO VELHO 2026</div>
 </div>
 
 <div class="carousel-container">
 <div class="carousel-track" id="track"></div>
-
 <div class="arrow arrow-left" id="prev">&#10094;</div>
 <div class="arrow arrow-right" id="next">&#10095;</div>
-
 <div class="dots" id="dots"></div>
+</div>
+
+<!-- 🔥 BOTÃO EXTREMO RODAPÉ -->
+<div class="tech-login-container">
+<a href="https://jokers11.com/area-premium-login"
+target="_blank"
+rel="noopener noreferrer"
+class="tech-premium-button">
+
+<span class="tech-title">FAZER LOGIN NO SITE</span>
+<span class="tech-subtitle">ACESSE A ÁREA PREMIUM</span>
+
+</a>
 </div>
 
 <script>
 
-const totalImages = 25;
-const track = document.getElementById('track');
-const dotsContainer = document.getElementById('dots');
-let currentIndex = 0;
-let autoPlay;
-
-/* GERAR IMAGENS AUTOMATICAMENTE */
+const totalImages=25;
+const track=document.getElementById('track');
+const dotsContainer=document.getElementById('dots');
+let currentIndex=0;
 
 for(let i=1;i<=totalImages;i++){
 const slide=document.createElement('div');
@@ -234,15 +264,14 @@ slide.classList.add('carousel-slide');
 
 const img=document.createElement('img');
 img.src=`img/foto${i}.jpg`;
-img.loading="lazy";
-img.decoding="async";
+img.addEventListener('click',()=>openFullscreen(img.src));
 
 slide.appendChild(img);
 track.appendChild(slide);
 
 const dot=document.createElement('div');
 dot.classList.add('dot');
-if(i===1) dot.classList.add('active');
+if(i===1)dot.classList.add('active');
 dot.addEventListener('click',()=>goToSlide(i-1));
 dotsContainer.appendChild(dot);
 }
@@ -261,48 +290,54 @@ track.style.transform=`translateX(-${index*100}%)`;
 updateDots();
 }
 
-function nextSlide(){
-currentIndex=(currentIndex+1)%slides.length;
-goToSlide(currentIndex);
+function nextSlide(){currentIndex=(currentIndex+1)%slides.length;goToSlide(currentIndex);}
+function prevSlide(){currentIndex=(currentIndex-1+slides.length)%slides.length;goToSlide(currentIndex);}
+
+document.getElementById('next').onclick=nextSlide;
+document.getElementById('prev').onclick=prevSlide;
+
+/* 🔥 FULLSCREEN COM DOWNLOAD */
+
+function openFullscreen(src){
+
+const overlay=document.createElement("div");
+overlay.style.position="fixed";
+overlay.style.top=0;
+overlay.style.left=0;
+overlay.style.width="100vw";
+overlay.style.height="100vh";
+overlay.style.background="rgba(0,0,0,0.95)";
+overlay.style.display="flex";
+overlay.style.flexDirection="column";
+overlay.style.alignItems="center";
+overlay.style.justifyContent="center";
+overlay.style.zIndex=9999;
+
+const img=document.createElement("img");
+img.src=src;
+img.style.maxWidth="95%";
+img.style.maxHeight="85%";
+img.style.borderRadius="12px";
+
+const download=document.createElement("a");
+download.href=src;
+download.download="";
+download.textContent="⬇ BAIXAR IMAGEM";
+download.style.marginTop="20px";
+download.style.padding="10px 25px";
+download.style.background="#ff0040";
+download.style.color="#fff";
+download.style.textDecoration="none";
+download.style.fontFamily="Orbitron";
+download.style.borderRadius="8px";
+
+overlay.appendChild(img);
+overlay.appendChild(download);
+
+overlay.addEventListener("click",()=>overlay.remove());
+
+document.body.appendChild(overlay);
 }
-
-function prevSlide(){
-currentIndex=(currentIndex-1+slides.length)%slides.length;
-goToSlide(currentIndex);
-}
-
-document.getElementById('next').addEventListener('click',nextSlide);
-document.getElementById('prev').addEventListener('click',prevSlide);
-
-/* AUTOPLAY OTIMIZADO */
-function startAuto(){
-autoPlay=setInterval(nextSlide,5000);
-}
-function stopAuto(){
-clearInterval(autoPlay);
-}
-
-startAuto();
-
-document.querySelector('.carousel-container')
-.addEventListener('mouseenter',stopAuto);
-
-document.querySelector('.carousel-container')
-.addEventListener('mouseleave',startAuto);
-
-/* SWIPE MOBILE */
-
-let startX=0;
-
-track.addEventListener('touchstart',e=>{
-startX=e.touches[0].clientX;
-});
-
-track.addEventListener('touchend',e=>{
-let endX=e.changedTouches[0].clientX;
-if(startX-endX>50) nextSlide();
-if(endX-startX>50) prevSlide();
-});
 
 </script>
 
